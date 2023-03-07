@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{28bbc0cb-fa27-4b63-95c5-d15033e64b98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Cluster.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Cluster.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\glsl\point.vert" />
+    <None Include="res\glsl\point.frag" />
+  </ItemGroup>
+</Project>
