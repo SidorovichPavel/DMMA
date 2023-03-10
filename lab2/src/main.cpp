@@ -16,7 +16,7 @@ float culc_mean_cluster_dist(const std::list<Cluster>& _Clusters);
 
 int main(int argc, char* args[])
 {
-	size_t count{ 1000000 };
+	size_t count{ 2500000 };
 	//std::cout << "Entry points count: ";
 	//std::cin >> count;
 
@@ -49,10 +49,11 @@ int main(int argc, char* args[])
 
 	std::vector<glm::vec3> points;
 	points.resize(count);
-	for (auto& p : points)
+	for (auto& [x, y, z] : points)
 	{
-		p = glm::vec3(std::random_device{}() % 2000 - 1000.f, std::random_device{}() % 2000 - 1000.f, 0.f);
-		p /= 1000.f;
+		x = (std::random_device{}() % 2000 - 1000.f) / 1000.f;
+		y = (std::random_device{}() % 2000 - 1000.f) / 1000.f;
+		z = 0.f;
 	}
 
 	auto fp = points.begin() + (std::random_device{}() % points.size());
@@ -162,10 +163,10 @@ float culc_mean_cluster_dist(const std::list<Cluster>& _Clusters)
 {
 	float mean_cluster_dist = 0.f;
 	size_t dist_count = 0;
-	for (auto it1 = _Clusters.begin(); it1 != _Clusters.end(); it1++)
+	for (auto it1 = _Clusters.begin(); it1 != _Clusters.end(); ++it1)
 		for (auto it2 = it1;;)
 		{
-			it2++;
+			++it2;
 			if (it2 == _Clusters.end()) break;
 
 			mean_cluster_dist += distance(it1->get_centre(), it2->get_centre());
