@@ -56,7 +56,7 @@ void Cluster::fill_mesh() noexcept
 	std::ranges::for_each(idcs, [&idx](auto& e) {e = idx++; });
 
 	std::unique_lock<std::mutex> locker(mMeshMutex);
-	mMesh.set_attribut(0, 3, mPoints.size(), mPoints.data());
+	mMesh.set_attribut(0, mPoints.size(), mPoints.data());
 	mMesh.set_indices(idcs.size(), idcs.data());
 }
 
@@ -94,7 +94,7 @@ void Cluster::draw(tgl::Mesh::GlDrawObject _DrawMode) noexcept
 		return;
 
 	std::unique_lock<std::mutex> locker(mMeshMutex);
-	mMesh.draw(_DrawMode);
+	mMesh.draw_elements(_DrawMode);
 }
 
 glm::vec3 Cluster::get_centre() noexcept

@@ -74,13 +74,13 @@ void calc_k_means(const std::vector<glm::vec3>& _Points, std::vector<Cluster>& _
 		check(p)->attach_point(p);
 }
 
-void processing(tgl::KeyBoard& _Keyboard, DrawMode& _DMode)
+void processing(tgl::Keyboard& _Keyboard, DrawMode& _DMode)
 {
 	auto& keys = _Keyboard;
-	using tgl::KeyCode;
+	using tgl::Keys;
 
 
-	if (keys[KeyCode::Return])
+	if (keys[Keys::Return])
 	{
 		static auto ret_tp = std::chrono::steady_clock::now();
 		auto tp = std::chrono::steady_clock::now();
@@ -94,7 +94,7 @@ void processing(tgl::KeyBoard& _Keyboard, DrawMode& _DMode)
 	}
 
 
-	if (keys[KeyCode::Space])
+	if (keys[Keys::Space])
 	{
 		static auto sp_tp = std::chrono::steady_clock::now();
 		auto tp = std::chrono::steady_clock::now();
@@ -160,7 +160,7 @@ int main()
 	tgl::Shader::path_prefix = "res\\";
 	std::unique_ptr<tgl::Shader> point_shader(new tgl::FileShader("point"));
 
-	tgl::KeyBoard key_board;
+	tgl::Keyboard key_board;
 
 	ta::Camera camera(
 		glm::vec3(0.f, 0.f, 5.f),
@@ -170,8 +170,8 @@ int main()
 
 	events.size.attach(&camera, &ta::Camera::update_aspect);
 	events.size.attach(tgl::view_port);
-	events.key_down.attach(&key_board, &tgl::KeyBoard::key_down);
-	events.key_up.attach(&key_board, &tgl::KeyBoard::key_up);
+	events.key_down.attach(&key_board, &tgl::Keyboard::key_down);
+	events.key_up.attach(&key_board, &tgl::Keyboard::key_up);
 	events.mouse_wheel.attach(&camera, &ta::Camera::update_Fovy);
 
 	std::vector<glm::vec3> points;
@@ -180,9 +180,9 @@ int main()
 	{
 		auto& [x, y, z] = p;
 		z = 0.f;
-		x = rand() % 2000 - 1000;
+		x = rand() % 2000 - 1000.f;
 		x /= 1000.f;
-		y = rand() % 2000 - 1000;
+		y = rand() % 2000 - 1000.f;
 		y /= 1000.f;
 	}
 
